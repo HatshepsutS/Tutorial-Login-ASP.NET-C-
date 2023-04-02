@@ -1,0 +1,22 @@
+CREATE DATABASE tutorialLogin;
+USE tutorialLogin;
+
+
+CREATE TABLE Usuarios (
+    ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Usuario varchar(255) NOT NULL,
+    Contra varchar(255),
+  
+);
+
+
+INSERT INTO Usuarios (Usuario,Contra) values ('LaloMagico','LalonoesMagico');
+INSERT INTO Usuarios (Usuario,Contra) values ('BobEsponja','123456');
+INSERT INTO Usuarios (Usuario,Contra) values ('Naruto','vivacristorey');
+
+Select * from Usuarios
+
+select Contra from Usuarios where Usuario='LaloMagicov'
+
+
+drop database tutorialLogin;
