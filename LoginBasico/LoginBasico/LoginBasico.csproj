@@ -44,6 +44,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -67,11 +70,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Crud.aspx" />
     <Content Include="LoginBasico.aspx" />
     <Content Include="Web.config" />
+    <Content Include="Registro.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="Crud.aspx.cs">
+      <DependentUpon>Crud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Crud.aspx.designer.cs">
+      <DependentUpon>Crud.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LoginBasico.aspx.cs">
       <DependentUpon>LoginBasico.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -80,6 +92,13 @@
       <DependentUpon>LoginBasico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

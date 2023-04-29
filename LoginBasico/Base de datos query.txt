@@ -18,5 +18,15 @@ Select * from Usuarios
 
 select Contra from Usuarios where Usuario='LaloMagicov'
 
+create procedure SPInsertUsser
+@Usuario varchar (50),
+@Contra varchar (50)
+as
+begin
+insert into Usuarios (Usuario,Contra) values (@Usuario , @Contra)
+end
+
+SPInsertUsser 'nani', 'hola'
+
 
 drop database tutorialLogin;

@@ -5,7 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
-
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
 namespace LoginBasico
 {
     public partial class LoginBasico : System.Web.UI.Page
@@ -16,48 +19,77 @@ namespace LoginBasico
         }
 
 
-        public static string evaluarResultado(string contra, string inputUsuario)
+        
+
+        public bool IsReCaptchValid()
         {
-            if (contra == inputUsuario)
-                return ("Bienvenido!");
-            else
-                return ("Usuario / Contraseña incorrecto");
+            var result = false;
+            var captchaResponse = Request.Form["g-recaptcha-response"];
+            var secretKey = System.Configuration.ConfigurationManager.AppSettings["SecretKey"];
+            var apiUrl = "https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}";
+            var requestUri = string.Format(apiUrl, secretKey, captchaResponse);
+            var request = (HttpWebRequest)WebRequest.Create(requestUri);
 
-
+            using (WebResponse response = request.GetResponse())
+            {
+                using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+                {
+                    JObject jResponse = JObject.Parse(stream.ReadToEnd());
+                    var isSuccess = jResponse.Value<bool>("success");
+                    result = (isSuccess);
+                }
+            }
+            return result;
         }
-
 
         protected void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            string contra="";
+            
+         
             using (SqlConnection con = Conexion.conectaSQL())
             {
-
-                SqlCommand cmd = new SqlCommand("Select Contra from Usuarios where Usuario ='" +txtUsuario.Text +"'",con);
+                SqlCommand cmd = new SqlCommand("Select *  from Usuarios where Usuario ='" + txtUsuario.Text + "' and  Contra='" + txtContra.Text + "'", con);
                 SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                if (reader.Read())
                 {
-                    reader.Read();
-                    contra = reader.GetString(0);
+
+                 if (IsReCaptchValid())
+                        {
+
+                        Session["usserin"] = txtUsuario.Text;
+                        ScriptManager.RegisterStartupScript(this, GetType(), "show alert", "alert('Bienvenido ')", true);
+                         Response.Redirect("Crud.aspx");
+                         }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, typeof(string),
+                            "MsgAlert", "alert('Validación Captcha incorrecta');window.location ='LoginBasico.aspx';", true);
+                    }
 
                 }
+
+               else {
+                    ScriptManager.RegisterClientScriptBlock(this, typeof(string),
+                        "MsgAlert", "alert('Validación Captcha incorrecta');window.location ='LoginBasico.aspx';", true);
+                }
+
+
+
                 reader.Close();
                 con.Close();
             }
 
-            string resultado = evaluarResultado(contra, txtContra.Text);
-
-            ScriptManager.RegisterStartupScript(this, GetType(), "show alert", "alert('"+resultado +"')", true );
-
-
-
-
+           
+        
 
 
         }
 
-
-
+        protected void btnRegistroClick(object sender, EventArgs e)
+        {
+            Response.Redirect("Registro.aspx");
+        }
 
     }
 }
+

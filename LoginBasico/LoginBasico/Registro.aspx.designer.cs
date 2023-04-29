@@ -11,7 +11,7 @@ namespace LoginBasico
 {
 
 
-    public partial class LoginBasico
+    public partial class WebForm1
     {
 
         /// <summary>
@@ -67,14 +67,5 @@ namespace LoginBasico
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnInciarSesion;
-
-        /// <summary>
-        /// Control LinkButton1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
     }
 }
