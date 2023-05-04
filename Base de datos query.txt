@@ -1,0 +1,23 @@
+CREATE DATABASE tutorialLogin;
+USE tutorialLogin;
+
+
+CREATE TABLE Usuarios (
+    ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Usuario varchar(255) NOT NULL,
+    Contra varchar(255),
+    EMAIL varchar (40),
+    TELEFONO varchar (40)	
+  
+);
+
+
+create procedure SPInsertUsser
+@Usuario varchar (50),
+@Contra varchar (50),
+@EMAIL varchar (40),
+@TELEFONO varchar (40)
+as
+begin
+insert into Usuarios (Usuario,Contra, EMAIL, TELEFONO) values (@Usuario , @Contra, @EMAIL , @TELEFONO)
+end
