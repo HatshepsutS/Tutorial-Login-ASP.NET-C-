@@ -97,6 +97,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AgregarLibro.aspx" />
     <Content Include="CambiarPassword.aspx" />
     <Content Include="crud.aspx" />
     <Content Include="LoginBasico.aspx" />
@@ -105,6 +106,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarLibro.aspx.cs">
+      <DependentUpon>AgregarLibro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarLibro.aspx.designer.cs">
+      <DependentUpon>AgregarLibro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CambiarPassword.aspx.cs">
       <DependentUpon>CambiarPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
