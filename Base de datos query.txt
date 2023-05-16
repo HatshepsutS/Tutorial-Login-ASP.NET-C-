@@ -11,6 +11,16 @@ CREATE TABLE Usuarios (
   
 );
 
+CREATE TABLE Libros (
+    ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Titulo varchar(255) NOT NULL,
+    Autor varchar(255),
+    Editorial varchar (255),
+    Edicion varchar (255)	
+  
+);
+
+
 
 create procedure SPInsertUsser
 @Usuario varchar (50),
@@ -21,3 +31,29 @@ as
 begin
 insert into Usuarios (Usuario,Contra, EMAIL, TELEFONO) values (@Usuario , @Contra, @EMAIL , @TELEFONO)
 end
+
+
+INSERT INTO Libros (Titulo, Autor, Editorial, Edicion) VALUES
+('La sombra del viento', 'Carlos Ruiz Zafón', 'Planeta', 'Primera'),
+('Cien años de soledad', 'Gabriel García Márquez', 'Sudamericana', 'Quinta'),
+('El nombre de la rosa', 'Umberto Eco', 'Lumen', 'Novena'),
+('Rayuela', 'Julio Cortázar', 'Sudamericana', 'Sexta'),
+('El Aleph', 'Jorge Luis Borges', 'Alianza', 'Décima');
+
+CREATE TABLE Libros (
+    ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Titulo varchar(255) NOT NULL,
+    Autor varchar(255),
+    Editorial varchar (255),
+    Edicion varchar (255)	
+  
+);
+
+
+
+
+
+
+
+
+
